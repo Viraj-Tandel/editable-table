@@ -1,0 +1,89 @@
+<div class="container mt-5">
+  <div class="mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="🔍 Search by any field..."
+      (input)="applySearch($any($event.target).value)"
+      [ngModel]="searchInput"
+    />
+  </div>
+
+  @if (paginatedUsers.length > 0) {
+    <div class="table-wrapper shadow-lg rounded-4 p-4 bg-white border">
+      <h4 class="mb-4 text-center text-primary fw-bold">User Information</h4>
+
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle text-center">
+          <thead class="table-dark">
+            <tr>
+              @for (header of headers; track header) {
+                <th class="text-uppercase px-4 py-3">{{ header }}</th>
+              }
+              <th class="text-uppercase px-4 py-3">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (user of paginatedUsers; track $index) {
+              <tr [class.table-warning]="user.isEditable">
+                @for (lkey of headers; track lkey) {
+                  <td class="px-4 py-3 text-wrap text-break">
+                    @if (user.isEditable) {
+                      <input
+                        [type]="lkey === 'version'? 'number': 'text'"
+                        class="form-control form-control-sm"
+                        [attr.value]="user[lkey] || ''"
+                        (input)="onInputChange(lkey, $event)"
+                        [readonly]="lkey === 'id'"
+                      />
+
+                    } @else {
+                      <span (click)="goToDetails(user)" style="cursor: pointer;">
+                        {{ user[lkey] }}
+                      </span>
+                    }
+                  </td>
+                }
+
+                <td class="px-4 py-3">
+                  @if (user.isEditable) {
+                    <button class="btn btn-success btn-sm me-1" (click)="saveEdit()">Save</button>
+                    <button class="btn btn-secondary btn-sm" (click)="cancelEdit()">Cancel</button>
+                  } @else {
+                    <button class="btn btn-primary btn-sm" (click)="startEdit($index)">Edit</button>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <nav class="mt-4 d-flex justify-content-center">
+        <ul class="pagination pagination-sm flex-wrap">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <button class="page-link" (click)="goToPage(currentPage - 1)">Previous</button>
+          </li>
+
+          @for (_ of paginationArray; track $index) {
+            <li class="page-item" [class.active]="currentPage === ($index + 1)">
+              <button class="page-link" (click)="goToPage($index + 1)">
+                {{ $index + 1 }}
+              </button>
+            </li>
+          }
+
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <button class="page-link" (click)="goToPage(currentPage + 1)">Next</button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  } @else {
+    <div class="alert alert-warning text-center fs-5 fw-medium">
+      No data available to display.
+    </div>
+  }
+</div>

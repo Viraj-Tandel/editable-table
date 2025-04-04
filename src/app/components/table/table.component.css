@@ -1,0 +1,45 @@
+.table-wrapper {
+    background-color: #ffffff;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th,
+td {
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+th {
+    background-color: #343a40;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+
+td {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.pagination .page-link {
+    margin: 0 3px;
+    border-radius: 0.375rem;
+    font-size: 0.85rem;
+    padding: 5px 12px;
+}
+
+td.text-wrap {
+    white-space: normal;
+    word-break: break-word;
+    max-width: 300px;
+}
+
+.pagination .page-item {
+    margin: 1px 3px;
+}
+  

@@ -1,0 +1,37 @@
+<div class="container py-5">
+    @if (user) {
+      <div class="card shadow-sm rounded-4 p-4 border-0" style="max-width: 800px; margin: auto;">
+        <h3 class="text-primary text-center fw-bold mb-4">👤 User Details</h3>
+  
+        <div class="row mb-3">
+          <div class="col-4 fw-semibold">👨 Name</div>
+          <div class="col-8 text-end">{{ user.name }}</div>
+        </div>
+        <hr />
+        <div class="row mb-3">
+          <div class="col-4 fw-semibold">🌐 Language</div>
+          <div class="col-8 text-end">{{ user.language }}</div>
+        </div>
+        <hr />
+        <div class="row mb-3">
+          <div class="col-4 fw-semibold">🆔 ID</div>
+          <div class="col-8 text-end">{{ user.id }}</div>
+        </div>
+        <hr />
+        <div class="row mb-3">
+          <div class="col-4 fw-semibold">📄 Bio</div>
+          <div class="col-8 text-end text-wrap text-break">{{ user.bio }}</div>
+        </div>
+        <hr />
+        <div class="row mb-2">
+          <div class="col-4 fw-semibold">📌 Version</div>
+          <div class="col-8 text-end">{{ user.version }}</div>
+        </div>
+      </div>
+    } @else {
+      <div class="alert alert-danger text-center fs-5 mt-5">
+        No user data found. Please return to the table page.
+      </div>
+    }
+  </div>
+  
