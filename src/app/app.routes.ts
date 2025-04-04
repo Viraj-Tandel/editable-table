@@ -10,6 +10,6 @@ export const routes: Routes = [
         path: 'user/:id', component: TableDetailsComponent
     },
     {
-        path: '**', redirectTo: 'users'
+        path: '**', redirectTo: 'users', pathMatch: 'full'
     }
 ];
